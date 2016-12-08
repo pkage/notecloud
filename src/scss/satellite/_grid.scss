@@ -1,0 +1,24 @@
+@import "media";
+
+
+.grid {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+}
+
+@for $i from 1 through 12 {
+	.col-#{$i} {
+		flex-basis: percentage($i/12);
+		&.margin {
+			margin: 0 1em 0 1em;
+		}
+	}
+	.col-m-#{$i} {
+		@extend .col-#{$i};
+		@include mobile {
+			flex-basis: 100%;
+		}
+	}
+}

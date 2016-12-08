@@ -1,0 +1,39 @@
+{
+  "name": "notecloud",
+  "version": "1.0.0",
+  "description": "notetaking cloud",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quadnix/notecloud.git"
+  },
+  "author": "Patrick Kage",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quadnix/notecloud/issues"
+  },
+  "homepage": "https://github.com/quadnix/notecloud#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "directory-tree": "^1.1.1",
+    "express": "^4.14.0",
+    "marked": "^0.3.6",
+    "node-watch": "^0.4.1",
+    "read-file": "^0.2.0",
+    "socket.io": "^1.7.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^2.2.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-preprocess": "^2.0.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
+  }
+}
