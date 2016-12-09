@@ -1,17 +1,12 @@
-const cfg = require('./config');
-const ops = require('./ops');
-
 // have separate http and websocket event handlers
 
-var express = require('express');
+// server operations
+var tree = require('directory-tree');
+var cfg = require('./config')
 
-var attach = function(app, io) {
-        // attach api
-        app.get('api/tree', function(req, res) {
-                res.json(ops.build_root_tree);
-        })
+
+var build_tree = function(dir) {
+        return tree(dir);
 }
 
-module.exports = {
-	attach: attach
-}
+var build_root_tree = _ => build_tree(cfg.root);
