@@ -96,6 +96,10 @@ app = new Vue({
 			var codeblocks = document.getElementsByTagName('code');
 			for (var i = 0; i < codeblocks.length; i++) {
 				var el = codeblocks[i];
+                                if (el.parent.tagName != 'pre') {
+                                        // skip inline blocks
+                                        continue;
+                                }
 				if (/lang\-/.test(el.className)) {
 					el.className += ' ' + el.className.replace('lang-', '');
 				}
