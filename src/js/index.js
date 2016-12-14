@@ -12,6 +12,7 @@ app = new Vue({
 		renderMarkdown: false,
 		renderMathjax: false,
 		renderHTML: false,
+		renderCodeHighlighting: false,
 		scrollOnUpdate: false
 	},
 	created: function() {
@@ -48,10 +49,6 @@ app = new Vue({
 				.then(res => {
 					this.note = res;
 					var view = document.getElementById('view');
-					if (this.scrollOnUpdate) {
-						view.scrollTop = view.scrollHeight;
-					}
-					this.rerenderMathjax();
 				});
 			this.showNoteView();
 		},
@@ -86,7 +83,8 @@ app = new Vue({
 			var toggle = ev.target.getAttribute('data-toggles');
 			this[toggle] = !this[toggle];
 
-			this.rerenderMathjax();
+			this.doPostRender();
+
 		},
 		scrollToBottom: function(force) {
 			var view = document.getElementById('view');
@@ -94,11 +92,29 @@ app = new Vue({
 				view.scrollTop = view.scrollHeight;
 			}
 		},
-		rerenderMathjax: function() {
+		highlightCode: function() {
+			var codeblocks = document.getElementsByTagName('code');
+			for (var i = 0; i < codeblocks.length; i++) {
+				var el = codeblocks[i];
+				if (/lang\-/.test(el.className)) {
+					el.className += ' ' + el.className.replace('lang-', '');
+				}
+				hljs.highlightBlock(el);
+			}
+		},
+		doPostRender: function() {
+			this.scrollToBottom();
+
+			// code highlighting
+			if (this.renderCodeHighlighting) {
+				setTimeout(this.highlightCode, 100);
+			}
+
+			// rerender stuff
 			if (this.renderMathjax) {
 				setTimeout(_ => {
 					MathJax.Hub.Queue(['Typeset', MathJax.Hub])
-                                        MathJax.Hub.Queue(this.scrollToBottom.bind(this));
+					MathJax.Hub.Queue(this.scrollToBottom.bind(this));
 				}, 100)
 			} else {
 				// check if we have anything to do
@@ -117,6 +133,11 @@ app = new Vue({
 				}, 100);
 			}
 		}
-	}
 
+	},
+	watch: {
+		note: function() {
+			this.doPostRender();
+		}
+	}
 })
