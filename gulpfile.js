@@ -76,6 +76,13 @@ gulp.task('watch', function() {
 	gulp.watch('src/libs/*', ['copylibs']);
 })
 
+gulp.task('build', [
+	'compilejs',
+	'compilescss',
+	'copylibs',
+	'compilehtml',
+])
+
 gulp.task('default', [
 	'compilejs',
 	'compilescss',
