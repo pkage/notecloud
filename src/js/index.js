@@ -107,7 +107,10 @@ app = new Vue({
 
 			// code highlighting
 			if (this.renderCodeHighlighting) {
-				setTimeout(this.highlightCode, 100);
+				setTimeout(_ => {
+					this.highlightCode();
+					this.scrollToBottom();
+				}, 100);
 			}
 
 			// rerender stuff
