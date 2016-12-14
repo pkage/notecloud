@@ -77,6 +77,9 @@
 
 .viewer {
         padding-bottom: 2rem;
+        > pre {
+                white-space: pre-wrap;
+        }
 }
 
 @media print {
