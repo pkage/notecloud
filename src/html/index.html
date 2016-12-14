@@ -35,7 +35,7 @@
 				</div>
 				<br>
 			</div>
-			<div class="col-m-6 margin">
+			<div class="col-m-6 margin fileview">
 				<div class="file-indicator">[{{note.path}}]</div>
 				<div :class="(renderMarkdown) ? '' : 'raw-view'" v-html="compile(note.raw)">
 				</div>
