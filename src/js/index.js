@@ -96,7 +96,7 @@ app = new Vue({
 			var codeblocks = document.getElementsByTagName('code');
 			for (var i = 0; i < codeblocks.length; i++) {
 				var el = codeblocks[i];
-                                if (el.parent.tagName != 'pre') {
+                                if (el.parentNode.tagName != 'pre') {
                                         // skip inline blocks
                                         continue;
                                 }
