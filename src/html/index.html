@@ -1,13 +1,53 @@
 <html>
-        <head>
-                <!-- @include head.html.frag -->
-                <title>notecloud</title>
-        </head>
 
-        <body> 
-                
+<head>
+	<!-- @include head.html.frag -->
+	<title>notecloud</title>
+</head>
 
-                <!-- @include js.html.frag -->
-                <script src="" defer></script>
-        </body>
+<body>
+	<div id="app">
+		<div class="fullscreen grid" id="index">
+			<div class="col-m-6 margin grid-vertical">
+				<input class="search" placeholder="search..." v-model="search" autofocus="true">
+
+				<ul class="expand">
+					<li v-for="note in getNotes()" class="index">
+						<a :data-doc="note.path" v-on:click="displayNote(note.path)">{{note.path}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="view" :class="viewActive ? 'active' : ''">
+			<div class="col-m-3">
+				<div class="close-button only-mobile" v-on:click="hideNoteView">close</div>
+				<div class="togglesettings" v-on:click="toggleSettings">
+					<span v-show="settingsOpen">- settings</span>
+					<span v-show="!settingsOpen">+ settings</span>
+				</div>
+				<div class="settings" v-show="settingsOpen">
+					<div class="setting" :data-active="renderMarkdown" data-toggles="renderMarkdown"
+						v-on:click="toggleSetting">render markdown</div>
+					<div class="setting" :data-active="renderHTML" data-toggles="renderHTML" v-on:click="toggleSetting">render html</div>
+					<div class="setting" :data-active="renderMathjax" data-toggles="renderMathjax" v-on:click="toggleSetting">render mathjax</div>
+					<div class="setting" :data-active="scrollOnUpdate" data-toggles="scrollOnUpdate"
+						v-on:click="toggleSetting">scroll on update</div>
+				</div>
+				<br>
+			</div>
+			<div class="col-m-6 margin">
+				<div class="file-indicator">[{{note.path}}]</div>
+				<div :class="(renderMarkdown) ? '' : 'raw-view'" v-html="compile(note.raw)">
+				</div>
+			</div>
+			<div class="only-desktop col-3">
+				<div class="close-button right" v-on:click="hideNoteView">close</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- @include js.html.frag -->
+	<script src="js/index.js" defer></script>
+</body>
+
 </html>

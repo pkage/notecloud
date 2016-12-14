@@ -1,0 +1,19 @@
+.search {
+        @extend input[type="text"];
+
+        font-size: 1.5em;
+        margin: 1em 0 1em 0;
+}
+
+.expand {
+        flex-grow: 1;
+}
+
+li.index {
+        @extend .monospace, .clickable;
+        list-style: none;
+}
+
+#app {
+        position: relative;
+}

@@ -1,0 +1,76 @@
+#view {
+        @extend .grid;
+
+        @include mobile {
+                display: block;
+        }
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100vw;
+        height: 100vh;
+
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.95);
+        visibilty: hidden;
+
+        overflow: auto;
+        overflow-x: clip;
+
+        transition: transition(transform), transition(opacity);
+
+        background-color: white;
+
+        &.active {
+                visibility: visible;
+                transform: none;
+                opacity: 1;
+                pointer-events: initial;
+        }
+}
+
+.raw-view {
+        @extend .monospace;
+        white-space: pre-wrap;
+}
+
+.togglesettings {
+        @extend .monospace, .clickable, .gray-8-text;
+        margin: 10px 0px 0px 10px;
+        user-select: none;
+}
+
+.settings {
+        user-select: none;
+        margin-left: calc(10px + 2em);
+}
+
+.setting {
+        @extend .monospace, .clickable;
+        
+        color: #c0392b;
+
+        &[data-active] {
+                color: #27ae60;
+        }
+}
+
+.close-button {
+        @extend .gray-8-text, .clickable, .monospace;
+        user-select: none;
+        margin: 10px;
+
+        &.right {
+                float: right;
+        }
+        
+}
+
+.file-indicator {
+        @extend .gray-8-text, .monospace;
+        user-select: none;
+        margin: 10px 0 10px 0;
+}

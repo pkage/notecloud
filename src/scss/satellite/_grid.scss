@@ -8,6 +8,12 @@
 	align-items: stretch;
 }
 
+.grid-vertical {
+        @extend .grid;
+        flex-direction: column;
+        justify-content: flex-start;
+}
+
 @for $i from 1 through 12 {
 	.col-#{$i} {
 		flex-basis: percentage($i/12);

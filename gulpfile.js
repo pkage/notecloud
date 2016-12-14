@@ -7,6 +7,7 @@ var cleancss = require('gulp-clean-css');
 var sourcemaps = require('gulp-sourcemaps');
 var pump = require('pump');
 var preprocess = require('gulp-preprocess');
+var request = require('request');
 
 // tasks
 
@@ -14,7 +15,7 @@ gulp.task('runserver', function() {
 	nodemon({
 		script: 'server.js',
 		ext: 'js',
-		ignore: ['src/*', 'dest/*'],
+		ignore: ['src/*', 'static/*'],
                 args: ['--config', 'notecloudrc'],
 		env: {
 			NODE_ENV: 'development',
@@ -34,14 +35,14 @@ gulp.task('compilehtml', function(cb) {
 });
 
 gulp.task('copylibs', function() {
-	return gulp.src('src/lib/*')
+	return gulp.src('src/lib/**')
 		.pipe(gulp.dest('static/js/lib/'));
 });
 
 gulp.task('compilejs', function(cb) {
 	pump([
 		gulp.src('src/js/*'),
-		uglify(),
+//		uglify(),
 		gulp.dest('static/js/')
 	], cb);
 })
@@ -61,10 +62,17 @@ gulp.task('compilescss', function(cb) {
 	], cb);
 });
 
+// meta tasks
+var reload = _ => request('http://localhost:3000/api/reload')
+gulp.task('reload_compilejs', ['compilejs'], reload);
+gulp.task('reload_compilescss', ['compilescss'], reload);
+gulp.task('reload_compilehtml', ['compilehtml'], reload);
+
+
 gulp.task('watch', function() {
-	gulp.watch('src/js/*', ['compilejs']);
-	gulp.watch('src/html/*', ['compilehtml']);
-	gulp.watch('src/scss/*', ['compilescss']);
+	gulp.watch('src/js/**', ['reload_compilejs']);
+	gulp.watch('src/html/*', ['reload_compilehtml']);
+	gulp.watch('src/scss/**', ['reload_compilescss']);
 	gulp.watch('src/libs/*', ['copylibs']);
 })
 
