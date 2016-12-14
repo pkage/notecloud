@@ -33,6 +33,7 @@
 					<div class="setting" :data-active="renderCodeHighlighting" data-toggles="renderCodeHighlighting" v-on:click="toggleSetting">highlight code</div>
 					<div class="setting" :data-active="scrollOnUpdate" data-toggles="scrollOnUpdate"
 						v-on:click="toggleSetting">scroll on update</div>
+                                        <a :href="getPrintLink()" target="_blank" class="monospace">print</a>
 				</div>
 				<br>
 			</div>

@@ -50,7 +50,7 @@
 
 .setting {
         @extend .monospace, .clickable;
-        
+
         color: #c0392b;
 
         &[data-active] {
@@ -66,7 +66,7 @@
         &.right {
                 float: right;
         }
-        
+
 }
 
 .file-indicator {
@@ -77,4 +77,18 @@
 
 .viewer {
         padding-bottom: 2rem;
+}
+
+@media print {
+        body * {
+                visibility: hidden;
+        }
+        .viewer, .viewer * {
+                visibility: visible;
+        }
+        .viewer {
+                position: absolute;
+                left: 0;
+                top: 0;
+        }
 }

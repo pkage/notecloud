@@ -48,7 +48,6 @@ app = new Vue({
 				.then(res => res.json())
 				.then(res => {
 					this.note = res;
-					var view = document.getElementById('view');
 				});
 			this.showNoteView();
 		},
@@ -96,10 +95,10 @@ app = new Vue({
 			var codeblocks = document.getElementsByTagName('code');
 			for (var i = 0; i < codeblocks.length; i++) {
 				var el = codeblocks[i];
-                                if (el.parentNode.tagName != 'PRE') {
-                                        // skip inline blocks
-                                        continue;
-                                }
+				if (el.parentNode.tagName != 'PRE') {
+					// skip inline blocks
+					continue;
+				}
 				if (/lang\-/.test(el.className)) {
 					el.className += ' ' + el.className.replace('lang-', '');
 				}
@@ -139,7 +138,16 @@ app = new Vue({
 					this.note.raw = note;
 				}, 100);
 			}
-		}
+		},
+		encodeQueryData: function(data) {
+			let ret = [];
+			for (let d in data)
+				ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+			return ret.join('&');
+		},
+                getPrintLink: function() {
+                        return '/view.html?' + this.encodeQueryData({path: this.note.path});
+                }
 
 	},
 	watch: {
