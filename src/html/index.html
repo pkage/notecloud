@@ -9,7 +9,7 @@
 	<div id="app">
 		<div class="fullscreen grid" id="index">
 			<div class="col-m-6 margin grid-vertical">
-				<input class="search" placeholder="search..." v-model="search" autofocus="true">
+				<input class="search" placeholder="search..." v-model="search" autofocus="true" v-on:keyup.13="displayTopNote()">
 
 				<ul class="expand">
 					<li v-for="note in getNotes()" class="index">

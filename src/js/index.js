@@ -51,6 +51,13 @@ app = new Vue({
 				});
 			this.showNoteView();
 		},
+		displayTopNote: function() {
+			var notes = this.getNotes();
+			if (notes.length > 0) {
+				this.displayNote(notes[0].path);
+			}
+			
+		},
 		showNoteView: function() {
 			this.viewActive = true;
 		},
